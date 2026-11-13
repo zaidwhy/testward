@@ -24,7 +24,12 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
+      - name: Tools the harness calls
+        run: |
+          python -m pip install -q uv
+          pipx install poetry
+          sudo apt-get install -y -q libegl1 libgl1 > /dev/null
       - name: Replay this chunk
         env:
           TESTWARD_SOURCE: ${{ github.workspace }}

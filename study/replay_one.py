@@ -13,11 +13,14 @@ import shutil
 import subprocess
 import sys
 import time
+import tomllib
 from pathlib import Path
 
-PULL_REQUEST_BUDGET_SECONDS = 15 * 60
+PULL_REQUEST_BUDGET_SECONDS = 20 * 60
 PYTEST = "python -m pytest {file} -x -q -p no:cacheprovider"
-EXTRAS = ("test", "tests", "testing", "dev")
+HARNESS_PYTHON = sys.executable
+# Plugins that repositories name in addopts; without them pytest exits 4 before running.
+PYTEST_PLUGINS = ("pytest", "pytest-asyncio", "pytest-cov", "pytest-mock", "pytest-xdist", "pytest-timeout")
 REQUIREMENT_FILES = (
     "requirements.txt",
     "requirements-dev.txt",
@@ -60,26 +63,57 @@ def venv_environment(venv: Path) -> dict:
     env["VENV_PYTHON"] = str(bin_dir / ("python.exe" if os.name == "nt" else "python"))
     env["PATH"] = f"{bin_dir}{os.pathsep}{env['PATH']}"
     env["VIRTUAL_ENV"] = str(venv)
+    env["UV_PROJECT_ENVIRONMENT"] = str(venv)
     env.pop("PYTHONHOME", None)
     return env
 
 
+def declared_groups(repo: Path) -> tuple[list[str], list[str]]:
+    """Extras and PEP 735 dependency groups the repository itself declares."""
+    try:
+        project = tomllib.loads((repo / "pyproject.toml").read_text(encoding="utf-8"))
+    except (OSError, tomllib.TOMLDecodeError, UnicodeDecodeError):
+        return [], []
+    extras = list(project.get("project", {}).get("optional-dependencies", {}))
+    return extras[:20], list(project.get("dependency-groups", {}))[:20]
+
+
 def install(repo: Path, env: dict, budget: Budget) -> str:
-    """Best effort and identical for every repository; returns what worked."""
+    """Best effort and identical for every repository; returns what worked.
+
+    Order: the lock file's own tool, then everything pyproject declares, then requirement
+    files. Nothing here is chosen per repository.
+    """
+    python = env["VENV_PYTHON"]
+    pip = [python, "-m", "pip", "install", "-q"]
     steps = []
-    run([env["VENV_PYTHON"], "-m", "pip", "install", "-q", "pytest"], repo, budget, env)
+
+    def attempt(label: str, argv: list[str]) -> bool:
+        code, _ = run(argv, repo, budget, env)
+        steps.append(label if code == 0 else f"{label}-failed")
+        return code == 0
+
+    run([*pip, *PYTEST_PLUGINS], repo, budget, env)
+    if (repo / "uv.lock").exists():
+        attempt("uv-sync", [HARNESS_PYTHON, "-m", "uv", "sync", "--all-extras", "--all-groups",
+                            "--inexact", "--python", python])
+    elif (repo / "poetry.lock").exists() and shutil.which("poetry"):
+        attempt("poetry", ["poetry", "install", "--no-interaction", "--all-extras", "--all-groups"])
     if (repo / "pyproject.toml").exists() or (repo / "setup.py").exists():
-        for extra in EXTRAS:
-            code, _ = run([env["VENV_PYTHON"], "-m", "pip", "install", "-q", "-e", f".[{extra}]"], repo, budget, env)
-            if code == 0:
-                steps.append(f"editable[{extra}]")
-        if not steps:
-            code, _ = run([env["VENV_PYTHON"], "-m", "pip", "install", "-q", "-e", "."], repo, budget, env)
-            steps.append("editable" if code == 0 else "editable-failed")
-    for name in REQUIREMENT_FILES:
-        if (repo / name).exists():
-            code, _ = run([env["VENV_PYTHON"], "-m", "pip", "install", "-q", "-r", name], repo, budget, env)
-            steps.append(name if code == 0 else f"{name}-failed")
+        extras, groups = declared_groups(repo)
+        with_extras = f".[{','.join(extras)}]" if extras else "."
+        if not attempt("editable+extras", [*pip, "-e", with_extras]):
+            attempt("editable", [*pip, "-e", "."])
+        for group in groups:
+            attempt(f"group:{group}", [*pip, "--group", group])
+    requirement_files = [name for name in REQUIREMENT_FILES if (repo / name).exists()]
+    requirement_files += sorted(
+        str(path.relative_to(repo)) for path in (repo / "requirements").glob("*.txt")
+    )[:8]
+    for name in requirement_files:
+        attempt(name, [*pip, "-r", name])
+    # The plugins again: a project pin may have replaced pytest and dropped them.
+    run([*pip, *PYTEST_PLUGINS], repo, budget, env)
     return ",".join(steps) or "nothing-to-install"
 
 
