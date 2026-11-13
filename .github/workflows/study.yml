@@ -1,0 +1,39 @@
+name: study
+# Replays sampled public pull requests. Each job installs and runs third-party code, so it
+# has no secrets, a read-only token that is not left in the checkout, and a hosted runner
+# that is thrown away afterwards.
+on:
+  workflow_dispatch:
+    inputs:
+      sample:
+        description: Sample file under study/, for example sample-a.jsonl
+        required: true
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        chunk: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Replay this chunk
+        env:
+          TESTWARD_SOURCE: ${{ github.workspace }}
+          SAMPLE: ${{ inputs.sample }}
+          CHUNK: ${{ matrix.chunk }}
+        run: python study/run_chunk.py "study/$SAMPLE" "$CHUNK" 30 "out-$CHUNK.jsonl"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: out-${{ inputs.sample }}-${{ matrix.chunk }}
+          path: out-*.jsonl
+          if-no-files-found: ignore

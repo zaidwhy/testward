@@ -5,3 +5,5 @@ __pycache__/
 dist/
 data/
 *.sqlite3*
+study/work/
+study/out-*.jsonl
