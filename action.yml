@@ -1,0 +1,44 @@
+name: testward
+description: Replay the base branch's tests against a pull request's code and fail when an old test no longer passes.
+inputs:
+  base:
+    description: Branch or commit the change merges into, for example origin/main.
+    required: true
+  command:
+    description: Test command used when the base branch has no .testward.toml. {file} is each changed test file.
+    required: false
+    default: ""
+  server:
+    description: URL of a testward server for human sign-offs. Needs TESTWARD_TOKEN in the step's env.
+    required: false
+    default: ""
+  strict:
+    description: Set to "true" to also fail on inconclusive replays.
+    required: false
+    default: "false"
+  send-logs:
+    description: Set to "false" to keep test output out of the report sent to the server.
+    required: false
+    default: "true"
+runs:
+  using: composite
+  steps:
+    - name: Install testward
+      shell: bash
+      run: python -m pip install --quiet "$GITHUB_ACTION_PATH"
+    - name: Replay base tests
+      shell: bash
+      # Inputs arrive as environment variables so a crafted value cannot become shell syntax.
+      env:
+        TW_BASE: ${{ inputs.base }}
+        TW_COMMAND: ${{ inputs.command }}
+        TW_SERVER: ${{ inputs.server }}
+        TW_STRICT: ${{ inputs.strict }}
+        TW_SEND_LOGS: ${{ inputs.send-logs }}
+      run: |
+        args=(replay --base "$TW_BASE" --markdown "$GITHUB_STEP_SUMMARY")
+        if [ -n "$TW_COMMAND" ]; then args+=(--command "$TW_COMMAND"); fi
+        if [ -n "$TW_SERVER" ]; then args+=(--server "$TW_SERVER"); fi
+        if [ "$TW_STRICT" = "true" ]; then args+=(--strict); fi
+        if [ "$TW_SEND_LOGS" = "false" ]; then args+=(--no-logs); fi
+        testward "${args[@]}"

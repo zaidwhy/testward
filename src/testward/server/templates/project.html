@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}{{ project.name }} - testward{% endblock %}
+{% block main %}
+<h1>{{ project.name }}</h1>
+
+{% if new_token %}
+<div class="entry">
+  <h3>Project token</h3>
+  <p>Copy it now. Only a hash is stored, so it cannot be shown again; you can replace it below.</p>
+  <pre>{{ new_token }}</pre>
+  <p>Save it in the repository as an Actions secret named <code>TESTWARD_TOKEN</code>.</p>
+</div>
+{% endif %}
+
+{% if not reports %}
+<h2>Send the first report</h2>
+<p>Add this workflow to the repository as <code>.github/workflows/testward.yml</code>. Change the
+install line and the <code>command</code> to match how your tests run; <code>{file}</code> is
+replaced by each changed test file.</p>
+{% include "workflow.html" %}
+<p>Open a pull request that edits an existing test. The report shows up here and in the job summary.</p>
+{% endif %}
+
+<h2>Waiting for sign-off ({{ waiting | length }})</h2>
+{% if not waiting %}
+<p class="faint">Nothing is waiting. A test edit lands here when the old version of the test fails on the new code.</p>
+{% endif %}
+{% for entry in waiting %}
+<div class="entry">
+  <h3 class="mono">{{ entry.path }}{% if entry.new_path %} &rarr; {{ entry.new_path }}{% endif %}</h3>
+  <p>
+    <span class="flag">The old test fails on the new code</span>
+    (exit {{ entry.head_exit }}) and passes on the old code. The change {{ entry.status }} this file.
+    {% if entry.report.change_url %}<a href="{{ entry.report.change_url }}" rel="noreferrer">Open the change</a>{% endif %}
+  </p>
+  {% if entry.log_tail %}
+  <details><summary>Output of the old test on the new code</summary><pre>{{ entry.log_tail }}</pre></details>
+  {% endif %}
+  <form class="stack" method="post" action="/app/projects/{{ project.id }}/signoffs">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="hidden" name="fingerprint" value="{{ entry.fingerprint }}">
+    <label>Why this test was right to change (10 to 500 characters)
+      <textarea name="reason" required minlength="10" maxlength="500" rows="2"></textarea>
+    </label>
+    <button type="submit">Sign off this edit</button>
+  </form>
+</div>
+{% endfor %}
+
+<h2>Sign-offs</h2>
+{% if signoffs %}
+<div class="scroll">
+<table>
+  <tr><th>Test file</th><th>Reason</th><th>By</th><th>When</th><th></th></tr>
+  {% for signoff in signoffs %}
+  <tr>
+    <td class="mono">{{ signoff.path }}</td>
+    <td>{{ signoff.reason }}</td>
+    <td>{{ signoff.signed_by }}</td>
+    <td class="mono">{{ signoff.signed_at | when }}</td>
+    <td>
+      <form method="post" action="/app/projects/{{ project.id }}/signoffs/{{ signoff.id }}/revoke">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <button class="link" type="submit">Revoke</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% else %}
+<p class="faint">No sign-offs recorded.</p>
+{% endif %}
+
+<h2>Recent reports</h2>
+{% if reports %}
+<div class="scroll">
+<table>
+  <tr><th>Received</th><th>Commit</th><th>Changed test files</th><th>Change</th></tr>
+  {% for report in reports %}
+  <tr>
+    <td class="mono">{{ report.received_at | when }}</td>
+    <td class="mono">{{ report.head[:10] }}</td>
+    <td>
+      {% for entry in report.files %}
+      <div><span class="mono">{{ entry.path }}</span>:
+        <span class="{{ 'flag' if entry.verdict == 'needs_signoff' else 'held' if entry.verdict == 'held' else 'faint' }}">{{ entry.verdict | replace("_", " ") }}</span>
+        {% if entry.note %}<span class="faint">({{ entry.note }})</span>{% endif %}
+      </div>
+      {% endfor %}
+    </td>
+    <td>{% if report.change_url %}<a href="{{ report.change_url }}" rel="noreferrer">open</a>{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% else %}
+<p class="faint">No reports yet.</p>
+{% endif %}
+
+<h2>Token</h2>
+<form method="post" action="/app/projects/{{ project.id }}/token">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  <button class="quiet" type="submit">Replace the project token</button>
+</form>
+<p class="faint">The old token stops working at once. Update the <code>TESTWARD_TOKEN</code> secret afterwards.</p>
+{% endblock %}

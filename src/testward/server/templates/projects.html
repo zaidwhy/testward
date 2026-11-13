@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Projects - testward{% endblock %}
+{% block main %}
+<h1>Projects</h1>
+{% if projects %}
+<table>
+  <tr><th>Project</th><th>Reports received</th></tr>
+  {% for project in projects %}
+  <tr>
+    <td><a href="/app/projects/{{ project.id }}">{{ project.name }}</a></td>
+    <td class="mono">{{ project.report_count }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No projects yet. A project is one repository. Creating it gives you the token your CI uses to send replay reports.</p>
+{% endif %}
+
+<h2>New project</h2>
+<form class="stack" method="post" action="/app/projects">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  <label>Repository name
+    <input name="name" required maxlength="80" placeholder="acme/checkout-service">
+  </label>
+  <button type="submit">Create project</button>
+</form>
+{% endblock %}

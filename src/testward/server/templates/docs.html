@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Docs - testward{% endblock %}
+{% block main %}
+<h1>Set up testward</h1>
+
+<h2>1. Try it on a branch, no account</h2>
+<pre>pip install git+https://github.com/zaidwhy/testward
+git checkout your-branch
+testward replay --base origin/main --command "pytest {file} -q"</pre>
+<p>Exit code 0 means every changed test held. Exit code 1 means at least one old test fails on
+the new code. Exit code 2 means the replay could not run, and the message says why.</p>
+<p>The working tree must have no uncommitted changes to tracked files: the replay rewrites test
+files in place and puts them back afterwards.</p>
+
+<h2>2. Run it on every pull request</h2>
+{% include "workflow.html" %}
+<p>Leave out <code>server</code> and the <code>env</code> block to run without sign-offs. The
+check then fails whenever an old test fails on the new code.</p>
+
+<h2>3. Add sign-offs</h2>
+<p><a href="/signup">Create an account</a>, create a project, and save its token as the
+<code>TESTWARD_TOKEN</code> secret. When a replay needs sign-off, the project page shows the test
+file, the output of the old test and a form for the reason. Re-run the job after signing off and
+it passes.</p>
+<p>Secrets are not given to pull requests from forks, so those run without sign-offs.</p>
+
+<h2>Settings</h2>
+<p>Put <code>.testward.toml</code> on the base branch. The copy on the base branch is the one that
+counts; a pull request cannot change its own test command.</p>
+<pre>command = "pytest {file} -q"      # {file} is each changed test file
+setup = "pip install -e ."         # optional, run after switching to the base code
+timeout_seconds = 300              # per test file, 1 to 3600
+max_files = 40                     # changed test files replayed per run, 1 to 200
+test_globs = ["test_*.py", "*_test.py", "*.test.*", "*.spec.*"]
+support_globs = ["conftest.py", "*.snap"]   # restored with the tests, not run alone</pre>
+
+<h2>What gets sent to this server</h2>
+<p>Commit ids, test file paths, exit codes, the test command, and the last 4,000 characters of
+output from each failing replay. No source code. Pass <code>--no-logs</code> (Action input
+<code>send-logs: false</code>) to keep test output out of the report.</p>
+{% endblock %}

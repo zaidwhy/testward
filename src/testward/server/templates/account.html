@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ "Create account" if action == "signup" else "Sign in" }} - testward{% endblock %}
+{% block main %}
+<h1>{{ "Create an account" if action == "signup" else "Sign in" }}</h1>
+{% if not open %}
+  <p class="problem">Sign-up is closed on this server. Ask whoever runs it for an account.</p>
+{% else %}
+  {% if problem %}<p class="problem" role="alert">{{ problem }}</p>{% endif %}
+  <form class="stack" method="post" action="/{{ action }}">
+    <label>Email
+      <input type="email" name="email" required maxlength="254" autocomplete="email">
+    </label>
+    <label>Password{% if action == "signup" %} (10 characters or more){% endif %}
+      <input type="password" name="password" required minlength="{{ 10 if action == 'signup' else 1 }}" maxlength="200"
+             autocomplete="{{ 'new-password' if action == 'signup' else 'current-password' }}">
+    </label>
+    <button type="submit">{{ "Create account" if action == "signup" else "Sign in" }}</button>
+  </form>
+  {% if action == "signup" %}
+    <p class="faint">An account holds projects. Each project gets a token for CI and a page where you sign off test edits.</p>
+  {% endif %}
+{% endif %}
+{% endblock %}

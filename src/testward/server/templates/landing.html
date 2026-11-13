@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}testward: did the change pass the tests, or change the tests to pass?{% endblock %}
+{% block main %}
+<h1>Did the change pass the tests, or change the tests to pass?</h1>
+<p class="lede">When a pull request edits a test and the code under it, a green build cannot tell
+you which one gave way. testward puts the tests back the way they were on the base branch and
+runs them against the new code.</p>
+
+<h2>What a reviewer sees</h2>
+<p>This is the report for a change that turned <code>assert total([1, 2, 3]) == 6</code> into
+<code>assert total([1, 2, 3])</code> while the function started dropping the first item.</p>
+<div class="scroll">
+<table>
+  <tr><th>Test file</th><th>Change</th><th>Old test, new code</th><th>Old test, old code</th><th>Verdict</th></tr>
+  <tr>
+    <td class="mono">tests/test_total.py</td><td>modified</td>
+    <td class="mono">exit 1</td><td class="mono">exit 0</td>
+    <td class="flag">needs sign-off: the old test fails on the new code</td>
+  </tr>
+  <tr>
+    <td class="mono">tests/test_format.py</td><td>modified</td>
+    <td class="mono">exit 0</td><td class="mono">not run</td>
+    <td class="held">held: the old test still passes</td>
+  </tr>
+</table>
+</div>
+
+<h2>Three verdicts, each from a run</h2>
+<p><strong>Held.</strong> The old test passes on the new code. The edit was a rename, a
+comment, a refactor. Nothing to look at.</p>
+<p><strong>Needs sign-off.</strong> The old test fails on the new code and passes on the old
+code. The change could not go green without altering this test. That is sometimes right, when
+the behaviour was meant to change. A person says so, with a reason, and the check passes.</p>
+<p><strong>Inconclusive.</strong> The old test fails on the old code too, or timed out. It was
+broken or flaky before this change, so testward does not accuse the change.</p>
+<p>There is no pattern matching on the diff and no model judging it. A verdict is two exit codes.</p>
+
+<h2>Why the sign-off lives on a server</h2>
+<p>A sign-off kept in the repository can be written by the same change that weakened the
+test. So can the test command. testward reads its settings from the base branch, and records
+sign-offs here, against the exact old and new content of the test file. Edit the test again and
+the sign-off no longer applies.</p>
+
+<h2>What it does not do</h2>
+<p>It does not judge tests that a change adds, find missing tests, or measure coverage. It
+replays whole test files, so one failing case flags the file. It runs your test command a second
+time for the changed test files only, on your own CI minutes.</p>
+
+<h2>Cost</h2>
+<p>The command-line tool and the GitHub Action are free and MIT licensed, and they work with no
+account. This hosted ledger is free during early access. The planned price after that is a flat
+$19 a month per organisation; nothing is charged today and no card is asked for.</p>
+
+<p><a href="/docs">Set it up in a workflow</a> or <a href="/signup">create an account for sign-offs</a>.</p>
+{% endblock %}

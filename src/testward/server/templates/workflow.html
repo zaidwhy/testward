@@ -1,0 +1,23 @@
+<pre>name: testward
+on: pull_request
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # the replay needs the merge base
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # install whatever your tests need, exactly as your normal test job does
+      - run: pip install -e . pytest
+      - uses: zaidwhy/testward@v0
+        with:
+          base: origin/{% raw %}${{ github.base_ref }}{% endraw %}
+          command: pytest {file} -q
+          server: {{ base_url }}
+        env:
+          TESTWARD_TOKEN: {% raw %}${{ secrets.TESTWARD_TOKEN }}{% endraw %}</pre>

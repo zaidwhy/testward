@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}testward{% endblock %}</title>
+<style>
+:root {
+  --paper: #f5f2ea; --sheet: #fffdf8; --ink: #1d1b17; --faint: #6b665c;
+  --rule: #d9d3c4; --flag: #a3401a; --held: #3f6b46;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #171613; --sheet: #1f1e1a; --ink: #ece8dd; --faint: #9d978a;
+    --rule: #3a372f; --flag: #e08a5f; --held: #8fbf97;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 1rem/1.6 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+.page { max-width: 47rem; margin: 0 auto; padding: 0 1rem 4rem; }
+header.top {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  flex-wrap: wrap; padding: 1.2rem 0; border-bottom: 2px solid var(--ink); margin-bottom: 2rem;
+}
+header.top a.name { font: 700 1.05rem ui-monospace, "Cascadia Mono", Consolas, monospace; color: var(--ink); text-decoration: none; }
+nav { display: flex; gap: 1.1rem; align-items: baseline; flex-wrap: wrap; font-size: .95rem; }
+a { color: var(--ink); text-underline-offset: 3px; }
+h1 { font-size: clamp(1.7rem, 5vw, 2.5rem); line-height: 1.15; margin: 0 0 1rem; font-weight: 600; letter-spacing: -.01em; }
+h2 { font-size: 1.2rem; margin: 2.6rem 0 .7rem; padding-top: .9rem; border-top: 1px solid var(--rule); }
+p.lede { font-size: 1.15rem; }
+code, pre, td.mono, .mono { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: .86em; }
+pre { background: var(--sheet); border: 1px solid var(--rule); padding: .9rem 1rem; overflow-x: auto; line-height: 1.5; }
+.scroll { overflow-x: auto; }
+.scroll table { min-width: 38rem; }
+table { border-collapse: collapse; width: 100%; background: var(--sheet); font-size: .93rem; }
+th, td { text-align: left; padding: .5rem .7rem; border: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); }
+.flag { color: var(--flag); font-weight: 600; }
+.held { color: var(--held); }
+.faint { color: var(--faint); }
+form.stack { display: grid; gap: .8rem; max-width: 24rem; }
+label { display: grid; gap: .25rem; font-size: .92rem; }
+input, textarea {
+  font: inherit; padding: .5rem .6rem; border: 1px solid var(--ink);
+  background: var(--sheet); color: var(--ink); border-radius: 0; width: 100%;
+}
+button {
+  font: 600 .9rem ui-monospace, Consolas, monospace; padding: .55rem .9rem; cursor: pointer;
+  background: var(--ink); color: var(--paper); border: 1px solid var(--ink); border-radius: 0;
+}
+button.quiet { background: none; color: var(--ink); }
+button.link { background: none; border: 0; color: var(--ink); padding: 0; text-decoration: underline; font: inherit; }
+:focus-visible { outline: 3px solid var(--flag); outline-offset: 2px; }
+.problem { border-left: 4px solid var(--flag); padding: .5rem .8rem; background: var(--sheet); }
+.entry { border: 1px solid var(--rule); background: var(--sheet); padding: 1rem; margin: 1rem 0; }
+.entry h3 { margin: 0 0 .3rem; font-size: 1rem; overflow-wrap: anywhere; }
+details summary { cursor: pointer; }
+footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: .85rem; color: var(--faint); }
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top">
+  <a class="name" href="/">testward</a>
+  <nav>
+    <a href="/docs">Docs</a>
+    {% if session %}
+      <a href="/app">Projects</a>
+      <form method="post" action="/logout">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <button class="link" type="submit">Sign out</button>
+      </form>
+    {% else %}
+      <a href="/login">Sign in</a>
+      <a href="/signup">Create account</a>
+    {% endif %}
+  </nav>
+</header>
+<main>{% block main %}{% endblock %}</main>
+<footer>testward is MIT licensed. The command-line tool and the GitHub Action work without this server.</footer>
+</div>
+</body>
+</html>
