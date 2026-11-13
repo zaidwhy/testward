@@ -14,9 +14,11 @@ Venv: `.venv` (`uv venv`), install with
 
 ## Next (session ended 2026-11-13 18:50 IST)
 
-0. Zaid labels the 62 flagged pull requests independently. Build him a local page over
-   `study/results/dossier-*.jsonl` (title, description, test diff; three buttons; own labels
-   hidden), then compute agreement with `labels-*.jsonl`. He has not yet said "build it".
+0. Zaid labels the 62 flagged pull requests independently. The page is built:
+   `python study/label_server.py`, open http://127.0.0.1:8790/, keys 1 2 3. His labels append
+   to `study/results/labels-zaid.jsonl`; then `python study/agreement.py`. The server never
+   reads `labels-a/b.jsonl`. Button and keyboard flow was read in code and the save API is
+   tested, but nobody has clicked through it in a browser yet.
    Release (tag + Zenodo) only after that and only on his go-ahead.
 
 ## Open, all optional
