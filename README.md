@@ -103,8 +103,9 @@ runner other than a plain `python {file}` script, any repository larger than the
 **Killed as a merge gate on 2026-11-13 by its own pre-registered test.** Replaying 447 merged
 agent pull requests from the AIDev dataset ([`study/RESULT.md`](study/RESULT.md)): the old
 tests fail on the new code in 62 of 170 conclusive replays (36.5%), and reading all 62 found
-59 intended behaviour changes, 3 unclear and 0 laundered. A gate that stops a third of honest
-test-editing pull requests to surface one questionable case in sixty is not worth installing.
+61 intended behaviour changes and 1 real regression (a fix lost when a stale branch was
+merged). A gate that stops a third of honest test-editing pull requests to surface one real
+problem in sixty is not worth installing.
 
 What survives: the replay itself is a cheap, exact answer to "did this change alter behaviour
 an existing test pinned down", useful as a note to a reviewer (`testward replay` exits 1 and

@@ -40,3 +40,11 @@ No further setup changes are made after this point. Sample A runs once with this
 
 Three pull requests were drawn into both samples. They are counted in sample A and removed
 from sample B at analysis, leaving 147.
+
+## 2026-11-13, after the first write-up
+
+The plan had one labelling pass. The three pull requests it left "unclear" were afterwards
+traced through commit and file history on GitHub. Two became "intended" and one became a real
+regression that meets the "laundered" rubric. The first-pass labels are kept beside the
+revised ones in `results/labels-*.jsonl`, and RESULT.md reports both. The 59 first-pass
+"intended" labels were not re-examined.

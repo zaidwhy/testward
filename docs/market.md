@@ -1,7 +1,7 @@
 # Is this worth building? Evidence, rivals, price, kill test
 
 > **Outcome, 2026-11-13:** kill test 1 was run and the product failed it. 36.5% of conclusive
-> replays needed sign-off and 59 of those 62 were intended changes, none laundered. See
+> replays needed sign-off and 61 of those 62 were intended changes; the other was a fix lost in a stale-branch merge. See
 > [`../study/RESULT.md`](../study/RESULT.md). Kill test 2 was not run. The rest of this page is
 > the reasoning as it stood before the test.
 
