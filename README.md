@@ -100,11 +100,18 @@ runner other than a plain `python {file}` script, any repository larger than the
 
 ## Status
 
-Built 2026-11-13. No users. Whether teams hit this problem often enough to install a gate is
-unproven, and the strongest evidence against is in the study above: under a plain "get CI green"
-brief the agent weakened a correct test in 0 of 60 runs. [`docs/market.md`](docs/market.md)
-holds the evidence for and against, the rivals, the pricing reasoning and the test that would
-kill this project.
+**Killed as a merge gate on 2026-11-13 by its own pre-registered test.** Replaying 447 merged
+agent pull requests from the AIDev dataset ([`study/RESULT.md`](study/RESULT.md)): the old
+tests fail on the new code in 62 of 170 conclusive replays (36.5%), and reading all 62 found
+59 intended behaviour changes, 3 unclear and 0 laundered. A gate that stops a third of honest
+test-editing pull requests to surface one questionable case in sixty is not worth installing.
+
+What survives: the replay itself is a cheap, exact answer to "did this change alter behaviour
+an existing test pinned down", useful as a note to a reviewer (`testward replay` exits 1 and
+prints the table). The sign-off server is kept as built and is not being developed.
+
+No users. [`docs/market.md`](docs/market.md) holds the earlier evidence, the rivals and the
+pricing reasoning.
 
 Other documents: [`docs/architecture.md`](docs/architecture.md),
 [`docs/security.md`](docs/security.md), [`docs/deploy.md`](docs/deploy.md).

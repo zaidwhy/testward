@@ -1,0 +1,17 @@
+{"url": "https://github.com/pydantic/logfire/pull/1792", "agent": "Claude_Code", "label": "intended", "reason": "export_dataset merged into get_dataset, as the title says"}
+{"url": "https://github.com/EuroEval/EuroEval/pull/1607", "agent": "Copilot", "label": "intended", "reason": "typing import style changed in the constants module; the test's name filter follows"}
+{"url": "https://github.com/OliverZhaohaibin/iPhotron-LocalPhotoAlbumManager/pull/463", "agent": "Copilot", "label": "intended", "reason": "index database renamed and centralised, the stated refactor"}
+{"url": "https://github.com/mfat/sshpilot/pull/418", "agent": "OpenAI_Codex", "label": "unclear", "reason": "a drag-and-drop change deletes test_open_remote_path_none_defaults; the description does not mention that behaviour"}
+{"url": "https://github.com/shotgun-sh/shotgun/pull/285", "agent": "Claude_Code", "label": "intended", "reason": "kuzu import made lazy; mock target moves with it"}
+{"url": "https://github.com/shouc/agentflow/pull/1", "agent": "Claude_Code", "label": "intended", "reason": "HTTP bridge replaced by direct CLI calls, as described"}
+{"url": "https://github.com/teng-lin/notebooklm-py/pull/100", "agent": "Claude_Code", "label": "intended", "reason": "JSON output shape standardised, the stated change"}
+{"url": "https://github.com/mfat/sshpilot/pull/533", "agent": "OpenAI_Codex", "label": "intended", "reason": "terminal backend abstraction needs a fuller stub of the GUI library"}
+{"url": "https://github.com/nexi-lab/nexus/pull/2142", "agent": "Claude_Code", "label": "intended", "reason": "endpoints now require auth; tests add an auth override"}
+{"url": "https://github.com/wesm/moneyflow/pull/34", "agent": "Claude_Code", "label": "intended", "reason": "batching changes the number of calls; the new count is explained in the test"}
+{"url": "https://github.com/iongpt/boxarr/pull/90", "agent": "Claude_Code", "label": "intended", "reason": "fetch function gains a limit parameter; fakes updated"}
+{"url": "https://github.com/roryeckel/wyoming_openai/pull/55", "agent": "Claude_Code", "label": "intended", "reason": "voice model gains backend_voice_name for the collision fix"}
+{"url": "https://github.com/boringdata/boring-semantic-layer/pull/146", "agent": "Claude_Code", "label": "unclear", "reason": "a lazy-import fix also changes dependency-group assertions from fastmcp to mcp, which the summary does not mention"}
+{"url": "https://github.com/mfat/sshpilot/pull/343", "agent": "OpenAI_Codex", "label": "intended", "reason": "alias handling changed exactly as the summary states"}
+{"url": "https://github.com/nexi-lab/nexus/pull/3451", "agent": "Claude_Code", "label": "intended", "reason": "abstract method set renamed for the cache layer"}
+{"url": "https://github.com/nexi-lab/nexus/pull/1866", "agent": "Claude_Code", "label": "intended", "reason": "TTLCache replaced by the cache store; tests of the old global removed"}
+{"url": "https://github.com/PrefectHQ/fastmcp/pull/1073", "agent": "Claude_Code", "label": "intended", "reason": "output schemas are now generated where the test expected None"}

@@ -1,5 +1,10 @@
 # Is this worth building? Evidence, rivals, price, kill test
 
+> **Outcome, 2026-11-13:** kill test 1 was run and the product failed it. 36.5% of conclusive
+> replays needed sign-off and 59 of those 62 were intended changes, none laundered. See
+> [`../study/RESULT.md`](../study/RESULT.md). Kill test 2 was not run. The rest of this page is
+> the reasoning as it stood before the test.
+
 Written 2026-11-13 from one afternoon of desk research. No customer was interviewed. Nothing
 below is a user quote unless it links to where the person wrote it.
 

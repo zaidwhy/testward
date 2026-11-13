@@ -2,34 +2,29 @@
 
 ## State
 
-Built in one session. Local git repository on `main`, not pushed, no remote. No users.
+Public at github.com/zaidwhy/testward. **Killed as a product** by the pre-registered
+prevalence study in `study/` (RESULT.md): 62 of 170 conclusive replays need sign-off, 59
+intended, 3 unclear, 0 laundered.
 
-- Replay CLI, GitHub Action (`action.yml`), sign-off server, docs: all written.
-- `python -m pytest -q` in `.venv`: 25 passed (Windows 11, Python 3.14).
-- Live flow run by hand on 127.0.0.1:8791: flagged (exit 1), signed off (exit 0), re-flagged
-  after a further edit (exit 1), wrong token (401).
+- Replay CLI, GitHub Action, sign-off server, docs: built, 25 tests pass, CI green on push.
+- Study: PREREG, DEVIATIONS, RESULT, raw rows and labels in `study/results/`.
 
-Venv: `.venv` (created with `uv venv`), install with
+Venv: `.venv` (`uv venv`), install with
 `uv pip install --python .venv/Scripts/python.exe -e ".[server,dev]"`.
 
-## Not verified
+## Open, all optional
 
-The Action on a hosted runner; Linux and macOS; the Docker image (never built); pytest, Jest or
-any real runner as the replay command; the pages at phone width (headless Edge cannot go
-below about 500 px); light theme.
-
-## Next, in order
-
-1. Kill test 1 in `docs/market.md`: replay merged agent pull requests from the AIDev dataset
-   and count "needs sign-off". This decides whether anything else is worth doing.
-2. Zaid: `gh repo create zaidwhy/testward --private --source . --push`, tag `v0`, then run the
-   Action on a real pull request.
-3. Only if the kill test passes: email verification and password reset, sign-up rate limit,
-   GitHub App for one-click sign-off.
+1. The study is a follow-up to flake-laundering and could be written up or deposited. Not
+   deposited; that needs Zaid's go-ahead. A second rater on `results/labels-*.jsonl` and a human
+   comparison group would be the first things a reviewer asks for.
+2. The three unclear pull requests were not investigated.
+3. Not verified: the Action on someone else's repository, the Docker image, phone-width pages.
 
 ## Things that will bite
 
-- Port 8765 on this machine belongs to the browser bridge; use another port for the server.
-- The craft-guard hook reads `raise ... from` inside an f-string line as SQL. Build the message
-  on its own line.
-- A replay killed mid-run can leave the checkout detached at the merge base.
+- Never run `study/replay_one.py` on sampled rows locally: it executes the sampled
+  repository's code. `selftest.sh` is the only local entry point.
+- Port 8765 on this machine belongs to the browser bridge.
+- The craft-guard hook reads `raise ... from` inside an f-string line as SQL.
+- A background `gh run` watcher and a foreground download of the same run race on the same
+  folder; use one.

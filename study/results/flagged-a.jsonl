@@ -1,0 +1,45 @@
+{"url": "https://github.com/gradion-ai/freeact/pull/66", "agent": "Claude_Code", "files": ["tests/unit/test_config.py"]}
+{"url": "https://github.com/stanfordnlp/dspy/pull/8745", "agent": "OpenAI_Codex", "files": ["tests/propose/test_grounded_proposer.py"]}
+{"url": "https://github.com/kexinoh/free-OKC/pull/4", "agent": "OpenAI_Codex", "files": ["tests/test_media.py"]}
+{"url": "https://github.com/nexi-lab/nexus/pull/3428", "agent": "Claude_Code", "files": ["tests/unit/core/test_factory_boot.py", "tests/unit/server/lifespan/test_lifespan_services.py", "tests/unit/test_factory.py"]}
+{"url": "https://github.com/trailofbits/algo/pull/14891", "agent": "Claude_Code", "files": ["tests/unit/test_template_rendering.py"]}
+{"url": "https://github.com/xorq-labs/xorq/pull/1752", "agent": "Claude_Code", "files": ["python/xorq/catalog/tests/test_bind.py", "python/xorq/catalog/tests/test_catalog.py", "python/xorq/catalog/tests/test_catalog_compose.py", "python/xorq/catalog/tests/test_catalog_ctor.py", "python/xorq/catalog/tests/test_cli.py"]}
+{"url": "https://github.com/vndee/llm-sandbox/pull/132", "agent": "Copilot", "files": ["tests/test_interactive_session.py"]}
+{"url": "https://github.com/Git-on-my-level/codex-autorunner/pull/1172", "agent": "OpenAI_Codex", "files": ["tests/test_pma_context.py"]}
+{"url": "https://github.com/robotocore/robotocore/pull/97", "agent": "Claude_Code", "files": ["tests/unit/gateway/test_services_filter.py"]}
+{"url": "https://github.com/open-jarvis/OpenJarvis/pull/152", "agent": "Claude_Code", "files": ["tests/core/test_config.py", "tests/core/test_config_phase3.py", "tests/server/test_middleware.py"]}
+{"url": "https://github.com/github-community-projects/issue-metrics/pull/604", "agent": "Copilot", "files": ["test_assignee_integration.py", "test_column_order_fix.py", "test_json_writer.py", "test_markdown_writer.py"]}
+{"url": "https://github.com/alchemiststudiosDOTai/tunacode/pull/405", "agent": "OpenAI_Codex", "files": ["tests/unit/ui/test_base_renderer.py"]}
+{"url": "https://github.com/open-jarvis/OpenJarvis/pull/102", "agent": "Claude_Code", "files": ["tests/cli/test_ask_router.py", "tests/learning/test_router.py", "tests/learning/test_routing_models.py"]}
+{"url": "https://github.com/BeehiveInnovations/pal-mcp-server/pull/51", "agent": "Claude_Code", "files": ["tests/test_line_numbers_integration.py"]}
+{"url": "https://github.com/spacetx/starfish/pull/2154", "agent": "Copilot", "files": ["starfish/test/full_pipelines/api/test_iss_api.py"]}
+{"url": "https://github.com/shotgun-sh/shotgun/pull/161", "agent": "Claude_Code", "files": ["test/unit/agents/history/test_file_content_deduplication.py"]}
+{"url": "https://github.com/BeehiveInnovations/pal-mcp-server/pull/119", "agent": "Claude_Code", "files": ["tests/test_openrouter_registry.py"]}
+{"url": "https://github.com/BerriAI/litellm/pull/20487", "agent": "Claude_Code", "files": ["tests/test_litellm/llms/sagemaker/test_sagemaker_embedding_voyage.py"]}
+{"url": "https://github.com/jrkropp/open-webui-developer-toolkit/pull/137", "agent": "OpenAI_Codex", "files": ["tests/test_publish.py"]}
+{"url": "https://github.com/brentyi/tyro/pull/268", "agent": "Claude_Code", "files": ["tests/test_errors.py", "tests/test_py311_generated/test_errors_generated.py"]}
+{"url": "https://github.com/llamastack/llama-stack/pull/5333", "agent": "Claude_Code", "files": ["tests/unit/providers/utils/inference/test_remote_inference_provider_config.py"]}
+{"url": "https://github.com/codingjoe/django-health-check/pull/578", "agent": "Copilot", "files": ["tests/contrib/test_rss.py"]}
+{"url": "https://github.com/microsoft/vscode-python-tools-extension-template/pull/265", "agent": "Copilot", "files": ["src/test/python_tests/test_get_cwd.py"]}
+{"url": "https://github.com/igerber/diff-diff/pull/233", "agent": "Claude_Code", "files": ["tests/test_survey_phase3.py"]}
+{"url": "https://github.com/FZJ-IEK3-VSA/tsam/pull/176", "agent": "Claude_Code", "files": ["test/test_aggregate_hiearchical.py", "test/test_api_equivalence.py", "test/test_assert_raises.py", "test/test_cluster_order.py", "test/test_golden_regression.py", "test/test_hypertuneAggregation.py", "test/test_preprocess.py", "test/test_reconstruct_samemean_segmentation.py", "test/test_samemean.py", "test/test_segmentation.py"]}
+{"url": "https://github.com/jgravelle/jcodemunch-mcp/pull/134", "agent": "Claude_Code", "files": ["tests/test_watch_claude.py"]}
+{"url": "https://github.com/PrimeIntellect-ai/verifiers/pull/974", "agent": "Claude_Code", "files": ["tests/test_env_crash_recovery.py"]}
+{"url": "https://github.com/run-llama/vibe-llama/pull/22", "agent": "Cursor", "files": ["tests/scaffold/test_scaffold.py"]}
+{"url": "https://github.com/zilliztech/memsearch/pull/7", "agent": "Claude_Code", "files": ["tests/test_config.py"]}
+{"url": "https://github.com/shotgun-sh/shotgun/pull/288", "agent": "Claude_Code", "files": ["test/unit/codebase/test_ingestor.py"]}
+{"url": "https://github.com/Azure-Samples/azure-search-openai-demo/pull/2752", "agent": "Copilot", "files": ["tests/test_app_config.py", "tests/test_prepdocs.py", "tests/test_searchmanager.py", "tests/test_upload.py"]}
+{"url": "https://github.com/thinking-machines-lab/tinker-cookbook/pull/568", "agent": "Claude_Code", "files": ["tests/downstream_compat/test_install_skills.py"]}
+{"url": "https://github.com/shotgun-sh/shotgun/pull/485", "agent": "Claude_Code", "files": ["test/unit/test_config_migrations.py", "test/unit/tui/test_provider_config.py"]}
+{"url": "https://github.com/codingjoe/django-health-check/pull/577", "agent": "Copilot", "files": ["tests/contrib/test_redis.py"]}
+{"url": "https://github.com/SkBlaz/py3plex/pull/978", "agent": "Copilot", "files": ["tests/test_book_conf.py", "tests/test_doc_conf.py"]}
+{"url": "https://github.com/alchemiststudiosDOTai/tunacode/pull/359", "agent": "Claude_Code", "files": ["tests/integration/tools/test_tool_dispatcher_coverage.py", "tests/unit/tools/test_submit.py"]}
+{"url": "https://github.com/bobmatnyc/claude-mpm/pull/321", "agent": "Claude_Code", "files": ["tests/core/test_enums.py", "tests/test_startup_display.py", "tests/unit/config/test_api_provider.py"]}
+{"url": "https://github.com/pymc-devs/pytensor/pull/1574", "agent": "Copilot", "files": ["tests/tensor/test_extra_ops.py"]}
+{"url": "https://github.com/open-jarvis/OpenJarvis/pull/115", "agent": "Claude_Code", "files": ["tests/cli/test_cli.py", "tests/cli/test_init_guidance.py"]}
+{"url": "https://github.com/goldspanlabs/optopsy/pull/215", "agent": "Claude_Code", "files": ["tests/test_tools_check_data_quality.py"]}
+{"url": "https://github.com/github-community-projects/contributors/pull/314", "agent": "Copilot", "files": ["test_markdown.py"]}
+{"url": "https://github.com/scikit-hep/mplhep/pull/674", "agent": "Claude_Code", "files": ["tests/test_mock.py"]}
+{"url": "https://github.com/BeehiveInnovations/pal-mcp-server/pull/95", "agent": "Claude_Code", "files": ["tests/test_debug.py", "tests/test_debug_certain_confidence.py", "tests/test_debug_comprehensive_workflow.py", "tests/test_debug_continuation.py", "tests/test_line_numbers_integration.py", "tests/test_model_enumeration.py", "tests/test_planner.py", "tests/test_precommit.py", "tests/test_precommit_diff_formatting.py", "tests/test_precommit_line_numbers.py", "tests/test_precommit_with_mock_store.py", "tests/test_tools.py"]}
+{"url": "https://github.com/microsoft/onnxscript/pull/2426", "agent": "Copilot", "files": ["onnxscript/rewriter/collapse_slices_test.py"]}
+{"url": "https://github.com/PrefectHQ/fastmcp/pull/2558", "agent": "Claude_Code", "files": ["tests/cli/test_tasks.py", "tests/server/proxy/test_stateful_proxy_client.py", "tests/server/tasks/test_progress_dependency.py", "tests/server/tasks/test_server_tasks_parameter.py", "tests/server/tasks/test_task_capabilities.py", "tests/server/test_logging.py", "tests/server/test_mount.py", "tests/server/test_server_docket.py", "tests/server/test_server_lifespan.py"]}

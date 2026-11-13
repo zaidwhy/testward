@@ -1,0 +1,45 @@
+{"url": "https://github.com/gradion-ai/freeact/pull/66", "agent": "Claude_Code", "label": "intended", "reason": "new feature changes the empty-skills prompt text; test updated to the new text"}
+{"url": "https://github.com/stanfordnlp/dspy/pull/8745", "agent": "OpenAI_Codex", "label": "intended", "reason": "replaces temperature jitter with rollout_id; test drops the removed T argument"}
+{"url": "https://github.com/kexinoh/free-OKC/pull/4", "agent": "OpenAI_Codex", "label": "intended", "reason": "media tools now require configured endpoints; old test never configures them"}
+{"url": "https://github.com/nexi-lab/nexus/pull/3428", "agent": "Claude_Code", "label": "intended", "reason": "event_bus moved off the service registry, as the title says"}
+{"url": "https://github.com/trailofbits/algo/pull/14891", "agent": "Claude_Code", "label": "intended", "reason": "loop syntax modernised; template variable shape changed as described"}
+{"url": "https://github.com/xorq-labs/xorq/pull/1752", "agent": "Claude_Code", "label": "intended", "reason": "catalog metadata field renamed sources to composed_from in a backend refactor"}
+{"url": "https://github.com/vndee/llm-sandbox/pull/132", "agent": "Copilot", "label": "intended", "reason": "imports made lazy; mock patch targets moved to the modules that now own them"}
+{"url": "https://github.com/Git-on-my-level/codex-autorunner/pull/1172", "agent": "OpenAI_Codex", "label": "intended", "reason": "passive threads demoted to reusable inventory, exactly what the summary states"}
+{"url": "https://github.com/robotocore/robotocore/pull/97", "agent": "Claude_Code", "label": "intended", "reason": "health endpoint payload replaced by the new orchestrator status map"}
+{"url": "https://github.com/open-jarvis/OpenJarvis/pull/152", "agent": "Claude_Code", "label": "intended", "reason": "security defaults changed (127.0.0.1, redact); tests assert the new defaults"}
+{"url": "https://github.com/github-community-projects/issue-metrics/pull/604", "agent": "Copilot", "label": "intended", "reason": "new stats_pr_comments argument added to a writer signature"}
+{"url": "https://github.com/alchemiststudiosDOTai/tunacode/pull/405", "agent": "OpenAI_Codex", "label": "intended", "reason": "dead renderers deleted with the tests that imported them"}
+{"url": "https://github.com/open-jarvis/OpenJarvis/pull/102", "agent": "Claude_Code", "label": "intended", "reason": "router now keys on complexity score, the feature being added"}
+{"url": "https://github.com/BeehiveInnovations/pal-mcp-server/pull/51", "agent": "Claude_Code", "label": "intended", "reason": "class renamed TestGenTool to TestGenerationTool in a larger refactor"}
+{"url": "https://github.com/spacetx/starfish/pull/2154", "agent": "Copilot", "label": "intended", "reason": "detector bug fix changes pipeline counts; expected values regenerated to match"}
+{"url": "https://github.com/shotgun-sh/shotgun/pull/161", "agent": "Claude_Code", "label": "intended", "reason": "private helper renamed in a copy-on-write rewrite"}
+{"url": "https://github.com/BeehiveInnovations/pal-mcp-server/pull/119", "agent": "Claude_Code", "label": "intended", "reason": "model identifiers moved from Claude 3 to Claude 4 names, the stated purpose"}
+{"url": "https://github.com/BerriAI/litellm/pull/20487", "agent": "Claude_Code", "label": "intended", "reason": "error message text changed while adding the second response format"}
+{"url": "https://github.com/jrkropp/open-webui-developer-toolkit/pull/137", "agent": "OpenAI_Codex", "label": "intended", "reason": "tests folder moved and import path rewritten"}
+{"url": "https://github.com/brentyi/tyro/pull/268", "agent": "Claude_Code", "label": "intended", "reason": "tuple narrowing extended; the old ambiguous case is now narrowed, test input changed"}
+{"url": "https://github.com/llamastack/llama-stack/pull/5333", "agent": "Claude_Code", "label": "intended", "reason": "providers removed with their config class"}
+{"url": "https://github.com/codingjoe/django-health-check/pull/578", "agent": "Copilot", "label": "intended", "reason": "RSS check narrowed to RSS 2.0; fixture date format changed as described"}
+{"url": "https://github.com/microsoft/vscode-python-tools-extension-template/pull/265", "agent": "Copilot", "label": "intended", "reason": "new notebook handlers need new stubs in the module mock"}
+{"url": "https://github.com/igerber/diff-diff/pull/233", "agent": "Claude_Code", "label": "intended", "reason": "IPW with survey weights is now supported; old test expected NotImplementedError"}
+{"url": "https://github.com/FZJ-IEK3-VSA/tsam/pull/176", "agent": "Claude_Code", "label": "intended", "reason": "breaking snake_case API rename, flagged as feat! in the title"}
+{"url": "https://github.com/jgravelle/jcodemunch-mcp/pull/134", "agent": "Claude_Code", "label": "intended", "reason": "branch filter removed on purpose; old test asserted the filter"}
+{"url": "https://github.com/PrimeIntellect-ai/verifiers/pull/974", "agent": "Claude_Code", "label": "unclear", "reason": "description says the file was consolidated into test_env_server.py, but the old retry-after-recovery test fails on the new code (assert 3 == 2) and the description does not mention retry behaviour changing"}
+{"url": "https://github.com/run-llama/vibe-llama/pull/22", "agent": "Cursor", "label": "intended", "reason": "bundled templates removed; test that read them deleted"}
+{"url": "https://github.com/zilliztech/memsearch/pull/7", "agent": "Claude_Code", "label": "intended", "reason": "flush renamed to compact everywhere"}
+{"url": "https://github.com/shotgun-sh/shotgun/pull/288", "agent": "Claude_Code", "label": "intended", "reason": "ignore-pattern constants reorganised by language"}
+{"url": "https://github.com/Azure-Samples/azure-search-openai-demo/pull/2752", "agent": "Copilot", "label": "intended", "reason": "Azure constructors replaced by the standard client; base_url and key handling differ as described"}
+{"url": "https://github.com/thinking-machines-lab/tinker-cookbook/pull/568", "agent": "Claude_Code", "label": "intended", "reason": "skill names lose the tinker- prefix, the stated change"}
+{"url": "https://github.com/shotgun-sh/shotgun/pull/485", "agent": "Claude_Code", "label": "intended", "reason": "provider added; list length 4 becomes 5"}
+{"url": "https://github.com/codingjoe/django-health-check/pull/577", "agent": "Copilot", "label": "intended", "reason": "Redis check rebuilt around a client parameter"}
+{"url": "https://github.com/SkBlaz/py3plex/pull/978", "agent": "Copilot", "label": "intended", "reason": "version strings bumped 1.0.3 to 1.1.0"}
+{"url": "https://github.com/alchemiststudiosDOTai/tunacode/pull/359", "agent": "Claude_Code", "label": "intended", "reason": "submit tool removed with its tests"}
+{"url": "https://github.com/bobmatnyc/claude-mpm/pull/321", "agent": "Claude_Code", "label": "intended", "reason": "enum gains a member (9 to 10) alongside the model-detection change"}
+{"url": "https://github.com/pymc-devs/pytensor/pull/1574", "agent": "Copilot", "label": "intended", "reason": "axis=None handling moved out of CumOp, as the title says"}
+{"url": "https://github.com/open-jarvis/OpenJarvis/pull/115", "agent": "Claude_Code", "label": "intended", "reason": "init gained a download step; tests pass --no-download"}
+{"url": "https://github.com/goldspanlabs/optopsy/pull/215", "agent": "Claude_Code", "label": "intended", "reason": "underlying_price made optional; the test that required it is removed"}
+{"url": "https://github.com/github-community-projects/contributors/pull/314", "agent": "Copilot", "label": "intended", "reason": "writer now emits one string; mock assertions rewritten"}
+{"url": "https://github.com/scikit-hep/mplhep/pull/674", "agent": "Claude_Code", "label": "intended", "reason": "bug fix adds an errorbar argument; mock call counts change"}
+{"url": "https://github.com/BeehiveInnovations/pal-mcp-server/pull/95", "agent": "Claude_Code", "label": "intended", "reason": "tools rebuilt on a workflow architecture; old tests removed or rewritten"}
+{"url": "https://github.com/microsoft/onnxscript/pull/2426", "agent": "Copilot", "label": "intended", "reason": "rule moved to its own module along with its test"}
+{"url": "https://github.com/PrefectHQ/fastmcp/pull/2558", "agent": "Claude_Code", "label": "intended", "reason": "enable_docket setting removed; checker function renamed"}

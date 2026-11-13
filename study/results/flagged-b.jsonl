@@ -1,0 +1,17 @@
+{"url": "https://github.com/pydantic/logfire/pull/1792", "agent": "Claude_Code", "files": ["tests/test_datasets_client.py"]}
+{"url": "https://github.com/shouc/agentflow/pull/1", "agent": "Claude_Code", "files": ["tests/test_agents.py", "tests/test_doctor.py", "tests/test_kimi_bridge.py", "tests/test_runners.py"]}
+{"url": "https://github.com/EuroEval/EuroEval/pull/1607", "agent": "Copilot", "files": ["tests/test_constants.py"]}
+{"url": "https://github.com/OliverZhaohaibin/iPhotron-LocalPhotoAlbumManager/pull/463", "agent": "Copilot", "files": ["tests/cache/test_sqlite_store.py"]}
+{"url": "https://github.com/mfat/sshpilot/pull/418", "agent": "OpenAI_Codex", "files": ["tests/test_sftp_utils_in_app_manager.py"]}
+{"url": "https://github.com/shotgun-sh/shotgun/pull/285", "agent": "Claude_Code", "files": ["test/unit/codebase/test_manager.py"]}
+{"url": "https://github.com/teng-lin/notebooklm-py/pull/100", "agent": "Claude_Code", "files": ["tests/unit/cli/test_artifact.py"]}
+{"url": "https://github.com/mfat/sshpilot/pull/533", "agent": "OpenAI_Codex", "files": ["tests/test_cleanup_process.py"]}
+{"url": "https://github.com/iongpt/boxarr/pull/90", "agent": "Claude_Code", "files": ["tests/integration/test_auto_add_rereleases_default.py", "tests/integration/test_auto_add_rereleases_enabled.py", "tests/integration/test_update_week_mapping.py"]}
+{"url": "https://github.com/boringdata/boring-semantic-layer/pull/146", "agent": "Claude_Code", "files": ["src/boring_semantic_layer/agents/tests/test_chats_cli.py", "src/boring_semantic_layer/tests/test_dependency_groups.py"]}
+{"url": "https://github.com/mfat/sshpilot/pull/343", "agent": "OpenAI_Codex", "files": ["tests/test_host_without_hostname.py", "tests/test_wildcard_rules.py"]}
+{"url": "https://github.com/nexi-lab/nexus/pull/2142", "agent": "Claude_Code", "files": ["tests/e2e/self_contained/pay/test_x402_integration.py", "tests/e2e/self_contained/test_tus_protocol.py", "tests/unit/server/api/v2/routers/test_bricks_router.py"]}
+{"url": "https://github.com/wesm/moneyflow/pull/34", "agent": "Claude_Code", "files": ["tests/test_editing.py"]}
+{"url": "https://github.com/roryeckel/wyoming_openai/pull/55", "agent": "Claude_Code", "files": ["tests/test_compatibility.py", "tests/test_handler.py", "tests/test_integration.py"]}
+{"url": "https://github.com/nexi-lab/nexus/pull/3451", "agent": "Claude_Code", "files": ["tests/e2e/self_contained/test_raft_metadata_store.py", "tests/unit/core/test_import_boundaries.py"]}
+{"url": "https://github.com/nexi-lab/nexus/pull/1866", "agent": "Claude_Code", "files": ["tests/unit/server/test_dependencies.py"]}
+{"url": "https://github.com/PrefectHQ/fastmcp/pull/1073", "agent": "Claude_Code", "files": ["tests/server/openapi/test_basic_functionality.py"]}
