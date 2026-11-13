@@ -12,6 +12,13 @@ intended, 1 real regression (sshpilot#418, a fix lost in a stale-branch merge).
 Venv: `.venv` (`uv venv`), install with
 `uv pip install --python .venv/Scripts/python.exe -e ".[server,dev]"`.
 
+## Next (session ended 2026-11-13 18:50 IST)
+
+0. Zaid labels the 62 flagged pull requests independently. Build him a local page over
+   `study/results/dossier-*.jsonl` (title, description, test diff; three buttons; own labels
+   hidden), then compute agreement with `labels-*.jsonl`. He has not yet said "build it".
+   Release (tag + Zenodo) only after that and only on his go-ahead.
+
 ## Open, all optional
 
 1. The study is a follow-up to flake-laundering and could be written up or deposited. Not
