@@ -19,8 +19,16 @@ from pathlib import Path
 PULL_REQUEST_BUDGET_SECONDS = 20 * 60
 PYTEST = "python -m pytest {file} -x -q -p no:cacheprovider"
 HARNESS_PYTHON = sys.executable
-# Plugins that repositories name in addopts; without them pytest exits 4 before running.
-PYTEST_PLUGINS = ("pytest", "pytest-asyncio", "pytest-cov", "pytest-mock", "pytest-xdist", "pytest-timeout")
+# A plugin is installed only when the repository's own configuration names it: without it
+# pytest exits 4 on the repository's options, and with it uninvited some suites break.
+PLUGIN_HINTS = {
+    "pytest-asyncio": ("asyncio",),
+    "pytest-cov": ("--cov", "pytest-cov", "pytest_cov"),
+    "pytest-mock": ("pytest-mock", "pytest_mock"),
+    "pytest-xdist": ("xdist", "--numprocesses"),
+    "pytest-timeout": ("pytest-timeout", "pytest_timeout", "--timeout"),
+}
+CONFIG_FILES = ("pyproject.toml", "setup.cfg", "pytest.ini", "tox.ini", "conftest.py")
 REQUIREMENT_FILES = (
     "requirements.txt",
     "requirements-dev.txt",
@@ -78,6 +86,16 @@ def declared_groups(repo: Path) -> tuple[list[str], list[str]]:
     return extras[:20], list(project.get("dependency-groups", {}))[:20]
 
 
+def named_plugins(repo: Path) -> list[str]:
+    text = ""
+    for name in CONFIG_FILES:
+        try:
+            text += (repo / name).read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+    return [plugin for plugin, hints in PLUGIN_HINTS.items() if any(h in text for h in hints)]
+
+
 def install(repo: Path, env: dict, budget: Budget) -> str:
     """Best effort and identical for every repository; returns what worked.
 
@@ -93,7 +111,9 @@ def install(repo: Path, env: dict, budget: Budget) -> str:
         steps.append(label if code == 0 else f"{label}-failed")
         return code == 0
 
-    run([*pip, *PYTEST_PLUGINS], repo, budget, env)
+    plugins = ["pytest", *named_plugins(repo)]
+    run([*pip, "--upgrade", "pip"], repo, budget, env)
+    run([*pip, *plugins], repo, budget, env)
     if (repo / "uv.lock").exists():
         attempt("uv-sync", [HARNESS_PYTHON, "-m", "uv", "sync", "--all-extras", "--all-groups",
                             "--inexact", "--python", python])
@@ -113,7 +133,8 @@ def install(repo: Path, env: dict, budget: Budget) -> str:
     for name in requirement_files:
         attempt(name, [*pip, "-r", name])
     # The plugins again: a project pin may have replaced pytest and dropped them.
-    run([*pip, *PYTEST_PLUGINS], repo, budget, env)
+    run([*pip, *plugins], repo, budget, env)
+    steps.append("plugins:" + "+".join(plugins[1:]))
     return ",".join(steps) or "nothing-to-install"
 
 

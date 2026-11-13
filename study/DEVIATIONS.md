@@ -24,3 +24,19 @@ the kill rules are unchanged.
 The pilot rows were seen before these changes, including which four were flagged. They stay
 in sample A and are re-run under the new setup; the result table reports sample A with and
 without those 30 rows.
+
+## 2026-11-13, after pilot 2 (run 43415455865, the same 30 pull requests)
+
+Pilot 2 result: 12 of 26 conclusive (46%; 7 held, 5 needs sign-off), floor control 0 of 24.
+Two repositories that were conclusive in pilot 1 became inconclusive because a pre-installed
+pytest plugin they do not use broke their suite.
+
+7. A pytest plugin is installed only when the repository's own configuration files name it.
+8. `pip` is upgraded in the fresh virtualenv so `--group` works.
+
+No further setup changes are made after this point. Sample A runs once with this setup.
+
+## 2026-11-13, sampling
+
+Three pull requests were drawn into both samples. They are counted in sample A and removed
+from sample B at analysis, leaving 147.
