@@ -80,6 +80,30 @@ only one in 62.
 - *Easy repositories only.* Conclusive yield was 68 of 141 for repositories with 100 to 1,000
   stars and 52 of 106 above 1,000; flagged rates 35% and 40% (sample A).
 
+## Second rater (added 2026-11-14)
+
+Zaid labelled all 62 flagged pull requests independently on the labelling page
+(`label_server.py`, which never reads the first rater's labels). Output of `study/agreement.py`
+is in `results/agreement-zaid.txt`; his labels are in `results/labels-zaid.jsonl`.
+
+| | intended | laundered | unclear |
+|---|---|---|---|
+| First rater, final | 61 | 1 | 0 |
+| Second rater | 53 | 5 | 4 |
+
+- Raw agreement with the final labels is 54 of 62 (87.1%), Cohen's kappa 0.18. Kappa is low
+  because almost every pull request is "intended", so chance agreement is already high; the
+  disagreements are what matter.
+- Both raters call sshpilot#418 laundered. The second rater also calls four more laundered
+  (pal-mcp-server#95, tsam#176, agentflow#1, xorq#1752) and four unclear (robotocore#97,
+  pytensor#1574, pal-mcp-server#51, shotgun#161). The first rater read all eight as intended
+  refactors or renames. These eight have not been traced through repository history the way
+  the first pass's three unclear cases were, so the count of real problems is between 1 and 9
+  of 62, not settled at 1.
+- **The kill decision does not change.** H2 fails if half or more of the flagged pull requests
+  are intended. On the second rater's labels 53 of 62 are intended (85.5%), still far above
+  the bar, so the gate is still killed under either rater.
+
 ## Limitations
 
 - **Half the replays were inconclusive** (192 of 362), 77 of the 121 in sample A because a
@@ -87,7 +111,7 @@ only one in 62.
   those that do not.
 - **Merged pull requests only.** Laundering that a reviewer caught before merge is absent.
   This measures what survives review.
-- **One rater.** 59 labels come from a single pass over the title, about 1,200 characters
+- **Second rater disagrees on 8 of 62** (section above). 59 first-rater labels come from a single pass over the title, about 1,200 characters
   of description and the test diff. Only the 3 first-pass unclear cases were traced through
   history; the 59 "intended" ones were not, and a lost change like the sshpilot one could be
   hiding among them wherever a description happens to sound complete. The labels, first-pass

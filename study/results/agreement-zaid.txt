@@ -1,0 +1,45 @@
+Zaid has labelled 62 of 62 PRs; 62 overlap with the first rater.
+
+Against the first rater's final labels
+  raw agreement: 54/62 (87.1%)
+  Cohen's kappa: 0.182
+  confusion table (rows: Zaid, columns: first rater)
+               intended  laundered    unclear
+  intended           53          0          0
+  laundered           4          1          0
+  unclear             4          0          0
+
+Against the first rater's first-pass labels
+  raw agreement: 51/62 (82.3%)
+  Cohen's kappa: 0.033
+  confusion table (rows: Zaid, columns: first rater)
+               intended  laundered    unclear
+  intended           51          0          2
+  laundered           4          0          1
+  unclear             4          0          0
+
+Disagreements with the final labels
+  https://github.com/robotocore/robotocore/pull/97
+    Zaid: unclear; note: (none)
+    first rater: intended; reason: health endpoint payload replaced by the new orchestrator status map
+  https://github.com/pymc-devs/pytensor/pull/1574
+    Zaid: unclear; note: (none)
+    first rater: intended; reason: axis=None handling moved out of CumOp, as the title says
+  https://github.com/BeehiveInnovations/pal-mcp-server/pull/51
+    Zaid: unclear; note: (none)
+    first rater: intended; reason: class renamed TestGenTool to TestGenerationTool in a larger refactor
+  https://github.com/BeehiveInnovations/pal-mcp-server/pull/95
+    Zaid: laundered; note: (none)
+    first rater: intended; reason: tools rebuilt on a workflow architecture; old tests removed or rewritten
+  https://github.com/FZJ-IEK3-VSA/tsam/pull/176
+    Zaid: laundered; note: (none)
+    first rater: intended; reason: breaking snake_case API rename, flagged as feat! in the title
+  https://github.com/shouc/agentflow/pull/1
+    Zaid: laundered; note: (none)
+    first rater: intended; reason: HTTP bridge replaced by direct CLI calls, as described
+  https://github.com/xorq-labs/xorq/pull/1752
+    Zaid: laundered; note: (none)
+    first rater: intended; reason: catalog metadata field renamed sources to composed_from in a backend refactor
+  https://github.com/shotgun-sh/shotgun/pull/161
+    Zaid: unclear; note: (none)
+    first rater: intended; reason: private helper renamed in a copy-on-write rewrite
