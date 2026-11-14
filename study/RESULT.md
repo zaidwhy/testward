@@ -9,18 +9,20 @@ the plan: [`DEVIATIONS.md`](DEVIATIONS.md).
    that edit a test file which already existed, the base-branch version of at least one such
    test fails on the merged code (and passes on the base code) in **62 of 170** conclusive
    replays: 36.5%, 95% CI 29.6 to 43.9%.
-2. **It is almost never a problem.** Reading all 62: **61 intended** behaviour changes
-   (renames, API changes, removed features, version bumps, new required arguments) and **1
-   real undisclosed regression**. The first pass left 3 unclear; each was then traced through
-   the repository's history (below), which settled two as intended and one as real.
-3. **The one real case is a merge accident, not an agent weakening a test.** A stale agent
-   branch was merged over a fix that was 46 minutes old, silently removing the fix and its
-   test; the maintainer redid the fix by hand four hours later. No case was found of an agent
-   loosening or deleting a test to hide a failure of its own change.
+2. **It is rarely a problem.** Reading all 62: **59 intended** behaviour changes
+   (renames, API changes, removed features, version bumps, new required arguments) and **3
+   real undisclosed regressions**. The first pass left 3 unclear and found 1 real case; a
+   second rater then disagreed on 8 more, and all 11 were traced through repository history
+   (below and "Second rater"). (Revised 2026-11-14; the 2026-11-13 version said 61 and 1.)
+3. **No real case is an agent weakening a test to hide its own failure.** Two are merge
+   accidents: a stale agent branch merged over work landed hours earlier, silently removing it
+   with the tests edited to match (sshpilot#418, robotocore#97). The third (agentflow#1)
+   replaced a bridge module and dropped its read-only tool enforcement without saying so; the
+   maintainers found it seven months later (issue #47) and fixed it (#49).
 4. **So the gate is killed.** `testward` as a merge gate would ask for a human sign-off on
-   about one in three honest test-editing pull requests to surface one real problem in 62
-   flags (1.6%, CI 0.3 to 8.6%), which is 1 in 170 conclusive replays (0.6%, CI 0.1 to 3.3%).
-   H1 held; H2 failed (98.4% intended, CI 91.4 to 99.7%, against a bar of under 50%).
+   about one in three honest test-editing pull requests to surface 3 real problems in 62
+   flags (4.8%, CI 1.7 to 13.3%), which is 3 in 170 conclusive replays (1.8%, CI 0.6 to 5.1%).
+   H1 held; H2 failed (95.2% intended, CI 86.7 to 98.3%, against a bar of under 50%).
 
 ## Numbers
 
@@ -98,8 +100,23 @@ is in `results/agreement-zaid.txt`; his labels are in `results/labels-zaid.jsonl
   (pal-mcp-server#95, tsam#176, agentflow#1, xorq#1752) and four unclear (robotocore#97,
   pytensor#1574, pal-mcp-server#51, shotgun#161). The first rater read all eight as intended
   refactors or renames. These eight have not been traced through repository history the way
-  the first pass's three unclear cases were, so the count of real problems is between 1 and 9
-  of 62, not settled at 1.
+  the first pass's three unclear cases were.
+- **Traced (2026-11-14), read-only through each repository's pull request, diff, later commits
+  and issues; no code run.** Two of the eight are real regressions:
+  - agentflow#1 (second rater: laundered): the Kimi bridge it replaced enforced read-only
+    tools; the new adapter runs the CLI with `--yolo` and ignores the setting, and the body
+    does not mention it. Issue shouc/agentflow#47 (2026-10-31) reported it; #49 fixed it.
+  - robotocore#97 (second rater: unclear): the merge commit removes 260 lines of
+    `gateway/app.py`, including the health endpoint's services filter and versioned
+    snapshots merged about two hours earlier; the description covers only the boot
+    orchestrator, and the features were not restored.
+  - The other six are intended: tsam#176 (`feat!` rename with deprecation shims and a
+    compatibility test), xorq#1752 (rename stated in the summary), pytensor#1574 (title and
+    linked issue describe the change), pal-mcp-server#51 (class rename only), shotgun#161
+    (change stated in the squash commit). pal-mcp-server#95 is borderline: the schema change is
+    the point of the rewrite, but its body also says "No breaking changes" and two tests were
+    replaced by skips. Counting it would make 4 of 62.
+- Real problems after tracing: 3 of 62 (sshpilot#418, robotocore#97, agentflow#1).
 - **The kill decision does not change.** H2 fails if half or more of the flagged pull requests
   are intended. On the second rater's labels 53 of 62 are intended (85.5%), still far above
   the bar, so the gate is still killed under either rater.
@@ -125,12 +142,13 @@ is in `results/agreement-zaid.txt`; his labels are in `results/labels-zaid.jsonl
 ## What this does not show
 
 - That agents never weaken tests. It shows no deliberate weakening among 62 flagged merged
-  pull requests and one lost change from a stale-branch merge.
+  pull requests and three undisclosed losses: two from stale-branch merges, one a dropped
+  safety check.
 - Anything about pull requests that were not merged, about languages other than Python, or
   about whether agents differ from human authors: there is no human comparison group.
 - That the replay is useless. It reliably answers "did this change alter behaviour that an
   existing test pinned down", and the three unclear cases are exactly the ones a reviewer
-  would want pointed out. It did point at the one real regression. It is information for a
+  would want pointed out. It did point at all three real regressions. It is information for a
   reviewer, not a gate.
 
 ## Reproduce
