@@ -1,0 +1,44 @@
+{
+  "title": "testward: How Often Do Old Tests Fail on Merged Agent Pull Requests, and Does It Matter?",
+  "upload_type": "publication",
+  "publication_type": "report",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "creators": [
+    {
+      "name": "Syed, Zaid Ali",
+      "orcid": "0009-0003-4313-1510",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "description": "<p>A pre-registered kill test for a merge gate. testward replays a pull request's pre-existing tests, at their base-branch version, against the merged code, and asks for a human sign-off when one that passed on the base now fails. The study asked whether that event is common enough, and rarely enough intended, to justify the gate.</p><p><strong>Data.</strong> 447 merged agent-authored pull requests from the AIDev dataset (Python repositories, two random samples with fixed seeds); each was replayed by running the base-branch tests against both the base and the merged code, and 170 gave a conclusive replay.</p><p><strong>1. The event is common.</strong> Old tests fail on the merged code in 62 of 170 conclusive replays (36.5 percent, 95 percent CI 29.6 to 43.9).</p><p><strong>2. It is rarely a problem.</strong> Two raters labelled all 62 independently (agreement 54 of 62); every disagreement and every unclear case was traced read-only through the repository's history. Result: 59 intended behaviour changes and 3 real undisclosed regressions (4.8 percent, CI 1.7 to 13.3). Two are stale agent branches merged over newer work; one dropped a read-only tool check. No case was found of an agent weakening a test to hide its own failure.</p><p><strong>3. The gate is killed</strong> by its own pre-registered rule: 95.2 percent of flags are intended changes, against a bar of under 50 percent. The replay remains useful as information for a reviewer, not as a gate.</p><p>Limits: half the replays were inconclusive (mostly dependencies that did not install), merged pull requests only, Python and pytest only, no human comparison group. The repository holds the pre-registration, deviations, every replay row, both raters' labels and the agreement report.</p>",
+  "keywords": [
+    "coding agents",
+    "pull requests",
+    "regression testing",
+    "test replay",
+    "code review",
+    "pre-registration",
+    "inter-rater agreement",
+    "AIDev"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/zaidwhy/testward",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.23721575",
+      "relation": "isContinuationOf",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://huggingface.co/datasets/hao-li/AIDev",
+      "relation": "references",
+      "scheme": "url"
+    }
+  ],
+  "language": "eng",
+  "notes": "The code is MIT licensed; this deposit, the written analysis and experimental design, is CC BY 4.0. ORCID 0009-0003-4313-1510."
+}

@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this project or its findings, please cite it as below."
+title: "testward: How Often Do Old Tests Fail on Merged Agent Pull Requests, and Does It Matter?"
+authors:
+  - family-names: "Syed"
+    given-names: "Zaid Ali"
+    orcid: "https://orcid.org/0009-0003-4313-1510"
+version: 0.1.0
+date-released: 2026-11-14
+url: "https://github.com/zaidwhy/testward"
+repository-code: "https://github.com/zaidwhy/testward"
+license: MIT
+abstract: >
+  A pre-registered kill test for a merge gate that replays a pull request's base-branch tests
+  against the merged code. Across 447 merged agent-authored pull requests from the AIDev
+  dataset, old tests fail on the merged code in 62 of 170 conclusive replays (36.5 percent).
+  Two raters and read-only history tracing found 59 of the 62 to be intended behaviour changes
+  and 3 to be real undisclosed regressions, two of them stale branches merged over newer work.
+  No agent was found weakening a test to hide its own failure. The gate is killed by its own
+  pre-registered rule.
+keywords:
+  - coding agents
+  - pull requests
+  - regression testing
+  - code review
+  - pre-registration
+  - inter-rater agreement
