@@ -1,4 +1,4 @@
-# testward handoff (2026-11-13)
+# testward handoff (2026-11-14)
 
 ## State
 
@@ -12,14 +12,20 @@ intended, 1 real regression (sshpilot#418, a fix lost in a stale-branch merge).
 Venv: `.venv` (`uv venv`), install with
 `uv pip install --python .venv/Scripts/python.exe -e ".[server,dev]"`.
 
-## Next (session ended 2026-11-13 18:50 IST)
+## Done 2026-11-14
 
-0. Zaid labels the 62 flagged pull requests independently. The page is built:
-   `python study/label_server.py`, open http://127.0.0.1:8790/, keys 1 2 3. His labels append
-   to `study/results/labels-zaid.jsonl`; then `python study/agreement.py`. The server never
-   reads `labels-a/b.jsonl`. Button and keyboard flow was read in code and the save API is
-   tested, but nobody has clicked through it in a browser yet.
-   Release (tag + Zenodo) only after that and only on his go-ahead.
+- Zaid labelled all 62 (`study/results/labels-zaid.jsonl`); agreement 54/62, kappa 0.18
+  (`results/agreement-zaid.txt`). The 8 disagreements were traced read-only through each
+  repository: agentflow#1 and robotocore#97 are real regressions, so the study now reports 3 of
+  62 real (59 intended). Kill unchanged (H2 fails at 95.2% intended). RESULT.md and README
+  updated.
+- Deposited on Zenodo: concept DOI 10.5281/zenodo.24219408, v0.1.0 = 24219409 (GitHub release
+  v0.1.0; Zenodo GitHub integration is on for this repo, so a new release makes a new version).
+
+## Next
+
+Nothing required. Optional: a new study on stale-branch merges (2 of the 3 real cases were a
+stale agent branch merged over newer work, which can be detected without replaying tests).
 
 ## Open, all optional
 
