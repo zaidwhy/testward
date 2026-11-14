@@ -3,8 +3,8 @@
 ## State
 
 Public at github.com/zaidwhy/testward. **Killed as a product** by the pre-registered
-prevalence study in `study/` (RESULT.md): 62 of 170 conclusive replays need sign-off, 61
-intended, 1 real regression (sshpilot#418, a fix lost in a stale-branch merge).
+prevalence study in `study/` (RESULT.md): 62 of 170 conclusive replays need sign-off, 59
+intended, 3 real regressions after a second rater and tracing (sshpilot#418, robotocore#97, agentflow#1).
 
 - Replay CLI, GitHub Action, sign-off server, docs: built, 25 tests pass, CI green on push.
 - Study: PREREG, DEVIATIONS, RESULT, raw rows and labels in `study/results/`.
