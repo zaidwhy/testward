@@ -120,5 +120,11 @@ Other documents: [`docs/architecture.md`](docs/architecture.md),
 
 MIT licensed.
 
+## Citing
+
+The study is archived on Zenodo: [10.5281/zenodo.24219408](https://doi.org/10.5281/zenodo.24219408)
+(concept DOI, resolves to the newest version; v0.1.0 is 10.5281/zenodo.24219409). Citation
+metadata is in `CITATION.cff`.
+
 [swarm]: https://dev.to/moonrunnerkc/catching-the-shortcuts-ai-coding-agents-take-to-look-done-45mm
 [study]: https://github.com/zaidwhy/flake-laundering
