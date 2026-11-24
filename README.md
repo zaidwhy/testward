@@ -1,5 +1,8 @@
 # testward
 
+![](.github/hero.webp)
+
+
 A green build proves little when the same change edited the tests. testward puts the base
 branch's tests back and runs them against the changed code, so a test that had to be loosened
 or deleted to get green is found by running it, not by reading the diff.
